@@ -1,6 +1,7 @@
 ﻿// bacteriamage.wordpress.com
 
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace BacteriaMage.N64.GameShark
 {
@@ -13,11 +14,17 @@ namespace BacteriaMage.N64.GameShark
         {
             RomReader reader = new RomReader();
             reader.ReadRomFromFile(path);
+            reader.PrintFirmwareVersion();
             return reader.ReadGames();
         }
 
         private RomReader()
         {
+        }
+
+        private void PrintFirmwareVersion()
+        {
+            Console.WriteLine($"GS ROM version: {FirmwareVersion}");
         }
 
         private List<Game> ReadGames()

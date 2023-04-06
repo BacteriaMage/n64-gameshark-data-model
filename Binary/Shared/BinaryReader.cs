@@ -114,6 +114,32 @@ namespace BacteriaMage.N64.GameShark
             }
         }
 
+        public string ReadPrintableCString(int max = 0)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            while (NextPrintableCharacter(out string character) && (max < 1 || builder.Length < max))
+            {
+                builder.Append(character);
+            }
+
+            return builder.ToString();
+        }
+
+        private bool NextPrintableCharacter(out string character)
+        {
+            if (NextByte(out byte b) && b >= ' ' && b <= '~')
+            {
+                character = ByteToCharacter(b);
+                return true;
+            }
+            else
+            {
+                character = "";
+                return false;
+            }
+        }
+
         private string ByteToCharacter(byte b)
         {
             if (b > 127)
