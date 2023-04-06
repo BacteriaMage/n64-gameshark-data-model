@@ -59,7 +59,7 @@ namespace BacteriaMage.N64.GameShark
 
         private void ClearUnusedPages()
         {
-            while (Writer.Position < Writer.Buffer.Length)
+            while (Writer.Position < Writer.Buffer?.Length)
             {
                 Writer.WriteByte(0xff);
             }

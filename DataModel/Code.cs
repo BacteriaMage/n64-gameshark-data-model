@@ -23,12 +23,12 @@ namespace BacteriaMage.N64.GameShark
             Value = 0x0000;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return Equals(obj as Code);
         }
 
-        public bool Equals(Code code)
+        public bool Equals(Code? code)
         {
             return (code != null) && (Address == code.Address) && (Value == code.Value);
         }

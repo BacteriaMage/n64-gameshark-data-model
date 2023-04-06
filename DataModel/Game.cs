@@ -47,12 +47,12 @@ namespace BacteriaMage.N64.GameShark
             return cheat;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return Equals(obj as Game);
         }
 
-        public bool Equals(Game game)
+        public bool Equals(Game? game)
         {
             return string.Equals(Name, game?.Name);
         }

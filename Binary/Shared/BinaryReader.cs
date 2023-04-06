@@ -11,11 +11,11 @@ namespace BacteriaMage.N64.GameShark
     /// </summary>
     class BinaryReader
     {
-        public byte[] Buffer { get; set; }
+        public byte[]? Buffer { get; set; }
         public int Position { get; set; }
         public int BytesRead { get; set; }
 
-        public int Length => Buffer.Length;
+        public int Length => Buffer?.Length ?? 0;
         public bool EndReached => Position >= Length;
 
         public BinaryReader(byte[] buffer)
@@ -39,15 +39,15 @@ namespace BacteriaMage.N64.GameShark
             return this;
         }
 
-        public int ReadUByte()
+        public byte ReadUByte()
         {
             if (Buffer == null || Position == Buffer.Length)
             {
-                throw new IndexOutOfRangeException("End of buffer reached");
+                throw new IndexOutOfRangeException($"End of buffer reached: {Buffer?.Length} (0x{Buffer?.Length:X8})");
             }
             if (Position < 0 || Position > Buffer.Length)
             {
-                throw new IndexOutOfRangeException("Invalid position");
+                throw new IndexOutOfRangeException($"Invalid position: {Position} (0x{Position:X8}). Must be between 0 and {Buffer.Length} (0x{Buffer.Length:X8}).");
             }
 
             byte b = Buffer[Position++];
@@ -57,40 +57,38 @@ namespace BacteriaMage.N64.GameShark
             return b;
         }
 
-        public int ReadSByte()
+        public sbyte ReadSByte()
         {
             return (sbyte)ReadUByte();
         }
 
-        public int ReadUInt16()
+        public UInt16 ReadUInt16()
         {
-            return (ReadUByte() << 8) + ReadUByte();
+            byte b1 = ReadUByte();
+            byte b2 = ReadUByte();
+            int value = (b1 << 8) + b2;
+            return (UInt16) value;
         }
 
-        public int ReadSInt16()
+        public Int16 ReadSInt16()
         {
             return (short)ReadUInt16();
         }
 
-        public uint ReadUInt32()
+        public UInt32 ReadUInt32()
         {
-            uint high = (uint)ReadUInt16();
-            uint low = (uint)ReadUInt16();
+            uint high = ReadUInt16();
+            uint low = ReadUInt16();
 
             return (high << 16) + low;
         }
 
-        public int ReadSInt32()
+        public Int32 ReadSInt32()
         {
             return (int)ReadUInt32();
         }
 
-        public string ReadCString()
-        {
-            return ReadCString(0);
-        }
-
-        public string ReadCString(int max)
+        public string ReadCString(int max = 0)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -130,7 +128,7 @@ namespace BacteriaMage.N64.GameShark
 
         private bool NextByte(out byte b)
         {
-            b = (byte)ReadUByte();
+            b = ReadUByte();
             return b != 0;
         }
     }

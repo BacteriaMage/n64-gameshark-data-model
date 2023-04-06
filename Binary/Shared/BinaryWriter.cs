@@ -13,7 +13,7 @@ namespace BacteriaMage.N64.GameShark
     /// </summary>
     class BinaryWriter
     {
-        public byte[] Buffer { get; set; }
+        public byte[]? Buffer { get; set; }
         public int Position { get; set; }
         public int BytesWritten { get; set; }
         public int AutoExtendSize { get; set; }
@@ -35,7 +35,7 @@ namespace BacteriaMage.N64.GameShark
 
         public void WriteToFile(string path)
         {
-            File.WriteAllBytes(path, Buffer);
+            File.WriteAllBytes(path, Buffer ?? Array.Empty<byte>());
         }
 
         public void Seek(int position)
@@ -45,7 +45,7 @@ namespace BacteriaMage.N64.GameShark
 
         public void SeekEnd()
         {
-            Seek(Buffer.Length);
+            Seek(Buffer?.Length ?? 0);
         }
 
         public void SeekOffset(int offset)
@@ -66,12 +66,12 @@ namespace BacteriaMage.N64.GameShark
             {
                 AutoExtend();
             }
-            if (Position < 0 || Position > Buffer.Length)
+            if (Position < 0 || Position > Buffer?.Length)
             {
                 throw new IndexOutOfRangeException("Invalid position");
             }
 
-            Buffer[Position++] = (byte)b;
+            Buffer![Position++] = (byte)b;
 
             BytesWritten++;
         }
@@ -158,7 +158,7 @@ namespace BacteriaMage.N64.GameShark
 
         private bool ReadEncodedByteAt(string s, ref int p, out byte b)
         {
-            int length = s?.Length ?? 0;
+            int length = s.Length;
 
             if (length - p >= 4)
             {

@@ -16,8 +16,8 @@ namespace BacteriaMage.N64.GameShark
         private IEnumerable<string> Lines;
 
         private readonly List<Game> Games = new List<Game>();
-        private Game Game;
-        private Cheat Cheat;
+        private Game? Game;
+        private Cheat? Cheat;
         private int LineNumber;
 
         public static List<Game> ReadLines(string path)
@@ -38,6 +38,7 @@ namespace BacteriaMage.N64.GameShark
 
         private ListReader()
         {
+            Lines = new List<string>();
             Game = null;
             Cheat = null;
             LineNumber = 1;

@@ -52,7 +52,7 @@ namespace BacteriaMage.N64.GameShark
         /// </summary>
         /// <param name="inputNotePath">Path to the note's MPK file</param>
         /// <param name="writer">Writer to write to; defaults to stdout if not specified</param>
-        public static void DisplayNote(string inputNotePath, TextWriter writer = null)
+        public static void DisplayNote(string inputNotePath, TextWriter? writer = null)
         {
             Game game = NoteReader.FromFile(inputNotePath);
 
@@ -84,7 +84,7 @@ namespace BacteriaMage.N64.GameShark
         }
 
         /// <summary>
-        /// Encrypt a GameShark ROM so that it can be flashed with the offical N64 utility.
+        /// Encrypt a GameShark ROM so that it can be flashed with the official N64 utility.
         /// </summary>
         /// <param name="inputPlainTextRomPath">Path to the input ROM</param>
         /// <param name="outputEncryptedRomPath">Path to the output ROM (e.g. ar3.enc)</param>
@@ -94,7 +94,7 @@ namespace BacteriaMage.N64.GameShark
         }
 
         /// <summary>
-        /// Decrypt a plain-text GameShark ROM from an encoded ROM file used by the official N64 utility.
+        /// Decrypt an encoded ROM file (used by the official N64 utility) to a plain-text GameShark ROM.
         /// </summary>
         /// <param name="inputEncryptedRomPath">Path to the encrypted ROM (e.g. ar3.enc)</param>
         /// <param name="outputPlainTextRomPath">Path to plain-text output ROM file</param>

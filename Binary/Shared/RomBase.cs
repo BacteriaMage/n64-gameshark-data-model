@@ -10,27 +10,27 @@ namespace BacteriaMage.N64.GameShark
         protected BinaryReader Reader { get; private set; }
         protected BinaryWriter Writer { get; private set; }
 
-        protected RomBase()
+        protected RomBase() : this(new BinaryReader())
         {
         }
 
         protected RomBase(BinaryReader reader)
         {
             Reader = reader;
-            Writer = new BinaryWriter(reader.Buffer);
+            Writer = new BinaryWriter(reader.Buffer ?? Array.Empty<byte>());
         }
 
         protected void ReadRomFromFile(string path)
         {
             BinaryReader rom = BinaryReader.FromFile(path);
+            Reader = rom;
 
             if (!ValidateRom(rom))
             {
                 throw new Exception("Not a valid N64 GameShark Pro ROM");
             }
 
-            Reader = rom;
-            Writer = new BinaryWriter(rom.Buffer);
+            Writer = new BinaryWriter(rom.Buffer ?? Array.Empty<byte>());
         }
 
         private bool ValidateRom(BinaryReader rom)

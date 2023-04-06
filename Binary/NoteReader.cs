@@ -30,7 +30,7 @@ namespace BacteriaMage.N64.GameShark
 
         private void SkipMpkHeader()
         {
-            if (Reader.ReadUByte() != 0x01 || string.Compare(Reader.ReadCString(), "MPKNote") != 0)
+            if (Reader.ReadUByte() != 0x01 || string.Compare(Reader.ReadCString(), "MPKNote", StringComparison.InvariantCulture) != 0)
             {
                 throw new Exception("Not an MPK Note");
             }
