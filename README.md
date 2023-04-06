@@ -1,6 +1,6 @@
 # N64 GameShark C# Data Model
 
-Just some quick-and-dirty classes representing the Games/Cheats/Codes data model used by the [Nintendo 64 GameShark](https://gameshark.fandom.com/wiki/Nintendo_64) Pro 3.x plus a couple of helper classes for reading and writing this data. The helpers can read and write the binary formats the GameShark itself uses as well the text format used by the [official N64 Utility program](http://web.archive.org/web/20110426190730/http://gscentral.org/tools/n64/gs_pro_utils.zip). I created these classes while playing around with some of the devices in my personal collection.
+Just some quick-and-dirty classes representing the Games/Cheats/Codes data model used by the [Nintendo 64 GameShark](https://gameshark.fandom.com/wiki/Nintendo_64) v1.08 and newer, plus a couple of helper classes for reading and writing this data. The helpers can read and write the binary formats the GameShark itself uses as well the text format used by the [official N64 Utility program](http://web.archive.org/web/20110426190730/http://gscentral.org/tools/n64/gs_pro_utils.zip). I created these classes while playing around with some of the devices in my personal collection.
 
 ## Note Files
 
