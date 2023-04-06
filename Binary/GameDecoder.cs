@@ -64,8 +64,6 @@ namespace BacteriaMage.N64.GameShark
 
         private string ReadName()
         {
-            Console.WriteLine($"position = {Reader.Position} (0x{Reader.Position:X8}), bytesRead = {Reader.BytesRead}, length = {Reader.Length}");
-
             string name = Reader.ReadCString(30);
 
             if (name.Length is < 1 or > 30)
