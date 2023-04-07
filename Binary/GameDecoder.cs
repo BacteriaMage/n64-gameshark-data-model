@@ -64,11 +64,11 @@ namespace BacteriaMage.N64.GameShark
 
         private string ReadName()
         {
-            string name = Reader.ReadCString(31);
+            string name = Reader.ReadCString(30);
 
-            if (name.Length < 1 || name.Length > 30)
+            if (name.Length is < 1 or > 30)
             {
-                throw new Exception("Invalid game or cheat name");
+                throw new Exception($"Invalid game or cheat name: '{name}'. Names be printable ASCII between 1-30 characters long, but found length = {name.Length}.");
             }
 
             name = name.Replace("`F6`", "Key");

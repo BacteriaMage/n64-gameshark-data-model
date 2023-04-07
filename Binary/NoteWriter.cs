@@ -17,7 +17,7 @@ namespace BacteriaMage.N64.GameShark
         {
             NoteWriter writer = new NoteWriter();
             writer.WriteGameNote(game);
-            File.WriteAllBytes(path, writer.Writer.Buffer);
+            File.WriteAllBytes(path, writer.Writer.Buffer ?? Array.Empty<byte>());
         }
 
         public NoteWriter()
